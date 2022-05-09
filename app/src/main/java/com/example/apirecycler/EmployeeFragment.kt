@@ -23,6 +23,8 @@ class EmployeeFragment : Fragment() {
 
         binding.viewModel = viewModel
 
+        binding.employeeList.adapter = EmployeeListAdapter()
+
         return binding.root
     }
 }

@@ -5,8 +5,8 @@
 
     <data>
         <variable
-            name="viewModel"
-            type="com.example.apirecycler.EmployeeViewModel" />
+            name="property"
+            type="com.example.apirecycler.network.EmployeeDetails" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
