@@ -1,5 +1,6 @@
 package com.example.apirecycler
 
+import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
@@ -34,6 +35,7 @@ class EmployeeViewModel : ViewModel() {
                 val listResult = getValuesDeferred.await()
                 _status.value = "Success: Employee count = ${listResult.size}"
                 if (listResult.isNotEmpty()) {
+                    Log.d("API Response", "getEmployeeDetails: $listResult")
                     _properties.value = listResult
                 }
             } catch (e:Exception) {

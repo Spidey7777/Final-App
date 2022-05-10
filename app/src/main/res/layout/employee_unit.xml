@@ -24,17 +24,19 @@
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
+            android:src="@drawable/man"
             tools:srcCompat="@drawable/man"
             />
 
         <TextView
             android:id="@+id/employee_name_text"
-            android:layout_width="0dp"
-            android:layout_height="40dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
             android:layout_marginStart="8dp"
             android:layout_marginTop="8dp"
             android:layout_marginEnd="16dp"
-            android:textSize="34sp"
+            android:textSize="20sp"
+            android:text="@{property.name}"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toEndOf="@+id/gender_icon"
             app:layout_constraintTop_toTopOf="@+id/gender_icon"
