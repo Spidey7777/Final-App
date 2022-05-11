@@ -17,9 +17,9 @@ class EmployeeViewModel : ViewModel() {
     val status: LiveData<String>
         get() = _status
 
-    private val _properties = MutableLiveData<List<EmployeeDetails>>()
-    val properties: LiveData<List<EmployeeDetails>>
-        get() = _properties
+    private val _employees = MutableLiveData<List<EmployeeDetails>>()
+    val employees: LiveData<List<EmployeeDetails>>
+        get() = _employees
 
     private var viewModelJob = Job()
     private val coroutineScope = CoroutineScope(viewModelJob + Dispatchers.Main)
@@ -36,12 +36,15 @@ class EmployeeViewModel : ViewModel() {
                 _status.value = "Success: Employee count = ${listResult.size}"
                 if (listResult.isNotEmpty()) {
                     Log.d("API Response", "getEmployeeDetails: $listResult")
-                    _properties.value = listResult
+                    _employees.value = listResult
                 }
             } catch (e:Exception) {
                 _status.value = "Failure: " + e.message
             }
         }
+    }
+
+    private fun setDrawable() {
     }
 
     override fun onCleared() {
