@@ -1,7 +1,9 @@
 package com.example.apirecycler
 
+import android.graphics.drawable.Drawable
 import android.view.LayoutInflater
 import android.view.ViewGroup
+import androidx.core.graphics.drawable.toDrawable
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
@@ -13,6 +15,13 @@ class EmployeeListAdapter : ListAdapter<EmployeeDetails, EmployeeListAdapter.Emp
         fun bind(employeeDetails: EmployeeDetails) {
             binding.property = employeeDetails
             binding.executePendingBindings()
+//            val genderIcon: Drawable
+//            if (binding.property.gender == "male") {
+//                genderIcon = R.drawable.man.toDrawable()
+//            }
+//            else {
+//                genderIcon = R.drawable.woman.toDrawable()
+//            }
         }
     }
 

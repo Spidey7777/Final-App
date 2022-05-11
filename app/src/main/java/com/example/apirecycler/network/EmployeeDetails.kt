@@ -5,5 +5,5 @@ data class EmployeeDetails(
     val name: String,
     val email: String,
     val gender: String,
-    val status: String
+    val status: String,
 )

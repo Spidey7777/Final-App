@@ -21,12 +21,11 @@
             android:layout_height="60dp"
             android:layout_marginStart="16dp"
             android:layout_marginTop="8dp"
+            android:src="@drawable/man"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            android:src="@drawable/man"
-            tools:srcCompat="@drawable/man"
-            />
+            tools:srcCompat="@drawable/man" />
 
         <TextView
             android:id="@+id/employee_name_text"
@@ -35,11 +34,24 @@
             android:layout_marginStart="8dp"
             android:layout_marginTop="8dp"
             android:layout_marginEnd="16dp"
-            android:textSize="20sp"
             android:text="@{property.name}"
+            android:textSize="20sp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toEndOf="@+id/gender_icon"
             app:layout_constraintTop_toTopOf="@+id/gender_icon"
             tools:text="John Doe" />
+
+        <TextView
+            android:id="@+id/textView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="16dp"
+            android:layout_marginEnd="16dp"
+            android:text="@{property.email}"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/gender_icon"
+            app:layout_constraintTop_toBottomOf="@+id/employee_name_text"
+            tools:text="john.doe@johndoe.com"/>
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

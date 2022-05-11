@@ -44,9 +44,6 @@ class EmployeeViewModel : ViewModel() {
         }
     }
 
-    private fun setDrawable() {
-    }
-
     override fun onCleared() {
         super.onCleared()
         viewModelJob.cancel()
