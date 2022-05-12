@@ -13,7 +13,7 @@ data class NetworkEmployee(
     val name: String,
     val email: String,
     val gender: String,
-    val status: String,
+    val status: String
 )
 
 fun NetworkEmployeeContainer.asDomainModel(): List<EmployeeDetails> {

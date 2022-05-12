@@ -9,7 +9,7 @@ import com.example.apirecycler.databinding.FragmentEmployeeBinding
 class EmployeeFragment : Fragment() {
 
     private val viewModel: EmployeeViewModel by lazy {
-        ViewModelProvider(this).get(EmployeeViewModel::class.java)
+        ViewModelProvider(this, EmployeeViewModel.Factory(activity?.application!!)).get(EmployeeViewModel::class.java)
     }
 
     override fun onCreateView(

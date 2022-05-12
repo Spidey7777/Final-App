@@ -1,51 +1,69 @@
 package com.example.apirecycler
 
-import android.util.Log
-import androidx.lifecycle.LiveData
-import androidx.lifecycle.MutableLiveData
+import android.app.Application
+import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.ViewModel
-import com.example.apirecycler.network.EmployeeApi
-import com.example.apirecycler.network.EmployeeDetails
-import kotlinx.coroutines.CoroutineScope
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.Job
+import androidx.lifecycle.ViewModelProvider
+import androidx.lifecycle.viewModelScope
+import com.example.apirecycler.database.getDataBase
+import com.example.apirecycler.repository.EmployeesRepository
 import kotlinx.coroutines.launch
-import java.lang.Exception
 
-class EmployeeViewModel : ViewModel() {
-    private val _status = MutableLiveData<String>()
-    val status: LiveData<String>
-        get() = _status
+class EmployeeViewModel(application: Application) : AndroidViewModel(application) {
+//    private val _status = MutableLiveData<String>()
+//    val status: LiveData<String>
+//        get() = _status
+//
+//    private val _employees = MutableLiveData<List<EmployeeDetails>>()
+//    val employees: LiveData<List<EmployeeDetails>>
+//        get() = _employees
+//
+//    private var viewModelJob = Job()
+//    private val coroutineScope = CoroutineScope(viewModelJob + Dispatchers.Main)
+//
+//    init {
+//        getEmployeeDetails()
+//    }
+//
+//    private fun getEmployeeDetails() {
+//        coroutineScope.launch {
+//            val getValuesDeferred = EmployeeApi.RETROFIT_SERVICE.getValues()
+//            try {
+//                val listResult = (getValuesDeferred.await()).asDomainModel()
+//                _status.value = "Success: Employee count = ${listResult.size}"
+//                if (listResult.isNotEmpty()) {
+//                    Log.d("API Response", "getEmployeeDetails: $listResult")
+//                    _employees.value = listResult
+//                }
+//            } catch (e:Exception) {
+//                _status.value = "Failure: " + e.messa private val database = getDatabase(application)
+//            }
+//        }
+//    }
+//
+//    override fun onCleared() {
+//        super.onCleared()
+//        viewModelJob.cancel()
+//    }
 
-    private val _employees = MutableLiveData<List<EmployeeDetails>>()
-    val employees: LiveData<List<EmployeeDetails>>
-        get() = _employees
-
-    private var viewModelJob = Job()
-    private val coroutineScope = CoroutineScope(viewModelJob + Dispatchers.Main)
+    private val database = getDataBase(application)
+    private val repository = EmployeesRepository(database)
 
     init {
-        getEmployeeDetails()
-    }
-
-    private fun getEmployeeDetails() {
-        coroutineScope.launch {
-            val getValuesDeferred = EmployeeApi.RETROFIT_SERVICE.getValues()
-            try {
-                val listResult = getValuesDeferred.await()
-                _status.value = "Success: Employee count = ${listResult.size}"
-                if (listResult.isNotEmpty()) {
-                    Log.d("API Response", "getEmployeeDetails: $listResult")
-                    _employees.value = listResult
-                }
-            } catch (e:Exception) {
-                _status.value = "Failure: " + e.message
-            }
+        viewModelScope.launch {
+            repository.refreshList()
         }
     }
 
-    override fun onCleared() {
-        super.onCleared()
-        viewModelJob.cancel()
+    val emplist = repository.employees
+
+    class Factory(val app: Application) : ViewModelProvider.Factory {
+        override fun <T : ViewModel?> create(modelClass: Class<T>): T {
+            if (modelClass.isAssignableFrom(EmployeeViewModel::class.java)) {
+                @Suppress("UNCHECKED_CAST")
+                return EmployeeViewModel(app) as T
+            }
+            throw IllegalArgumentException("Unable to construct viewmodel")
+        }
     }
 }
