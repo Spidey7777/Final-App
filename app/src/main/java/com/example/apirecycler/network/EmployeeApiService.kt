@@ -27,7 +27,7 @@ interface EmployeeApiService {
 //    @GET("api/v3/ticker/24hr")
 //    @GET("realestate")
     fun getValues():
-            Deferred<List<EmployeeDetails>>
+            Deferred<NetworkEmployeeContainer>
 }
 
 object EmployeeApi {

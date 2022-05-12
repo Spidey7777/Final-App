@@ -8,10 +8,13 @@ import com.example.apirecycler.network.asDatabaseModel
 
 class EmployeesRepository(private val database: EmployeesDatabase) {
 
+    val empList =
+
     suspend fun refreshList() {
         withContext(Dispatchers.IO) {
             val employeeList = EmployeeApi.RETROFIT_SERVICE.getValues().await()
 //            database.employeeDao.insertAll(*employeeList.asDatabaseModel())
+            database.employeeDao.insertAll(*employeeList.asDatabaseModel())
         }
     }
 }
