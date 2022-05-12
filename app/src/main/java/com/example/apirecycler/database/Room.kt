@@ -20,7 +20,7 @@ abstract class EmployeesDatabase: RoomDatabase() {
 
 private lateinit var INSTANCE: EmployeesDatabase
 
-fun getDataBase(context: Context): EmployeesDatabase {
+fun getDatabase(context: Context): EmployeesDatabase {
     synchronized(EmployeesDatabase::class.java) {
         if (!::INSTANCE.isInitialized) {
             INSTANCE = Room.databaseBuilder(context.applicationContext, EmployeesDatabase::class.java, "employees").build()
