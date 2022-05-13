@@ -9,8 +9,13 @@ interface EmployeeDao {
     @Query(value = "select * from databaseemployee")
     fun getEmployees(): LiveData<List<DatabaseEmployee>>
 
+    @Insert(onConflict = OnConflictStrategy.IGNORE)
+    fun insertAll(employees_list : ArrayList<DatabaseEmployee>)
+
+
     @Insert(onConflict = OnConflictStrategy.REPLACE)
-    fun insertAll(vararg employees: DatabaseEmployee)
+    fun insert(vararg employees:DatabaseEmployee)
+
 }
 
 @Database(entities = [DatabaseEmployee::class], version = 1)
@@ -23,7 +28,7 @@ private lateinit var INSTANCE: EmployeesDatabase
 fun getDatabase(context: Context): EmployeesDatabase {
     synchronized(EmployeesDatabase::class.java) {
         if (!::INSTANCE.isInitialized) {
-            INSTANCE = Room.databaseBuilder(context.applicationContext, EmployeesDatabase::class.java, "employees").build()
+            INSTANCE = Room.databaseBuilder(context.applicationContext, EmployeesDatabase::class.java, "DatabaseEmployee").build()
         }
     }
     return INSTANCE

@@ -5,18 +5,19 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
+import com.example.apirecycler.database.DatabaseEmployee
 import com.example.apirecycler.databinding.EmployeeUnitBinding
 import com.example.apirecycler.network.EmployeeDetails
 import java.util.logging.Logger.global
 
-class EmployeeListAdapter : ListAdapter<EmployeeDetails, EmployeeListAdapter.EmployeeDetailsViewHolder>(DiffCallback) {
+class EmployeeListAdapter : ListAdapter<DatabaseEmployee, EmployeeListAdapter.EmployeeDetailsViewHolder>(DiffCallback) {
     class EmployeeDetailsViewHolder(private var binding: EmployeeUnitBinding) : RecyclerView.ViewHolder(binding.root){
-        var employees: List<EmployeeDetails> = emptyList()
+        var employees: List<DatabaseEmployee> = emptyList()
             set(value) {
                 field = value
             }
 
-        fun bind(employeeDetails: EmployeeDetails) {
+        fun bind(employeeDetails: DatabaseEmployee) {
             binding.property = employeeDetails
             binding.executePendingBindings()
 //            val genderIcon: Drawable
@@ -29,14 +30,14 @@ class EmployeeListAdapter : ListAdapter<EmployeeDetails, EmployeeListAdapter.Emp
         }
     }
 
-    companion object DiffCallback : DiffUtil.ItemCallback<EmployeeDetails>(){
-        override fun areItemsTheSame(oldItem: EmployeeDetails, newItem: EmployeeDetails): Boolean {
+    companion object DiffCallback : DiffUtil.ItemCallback<DatabaseEmployee>(){
+        override fun areItemsTheSame(oldItem: DatabaseEmployee, newItem: DatabaseEmployee): Boolean {
             return oldItem === newItem
         }
 
         override fun areContentsTheSame(
-            oldItem: EmployeeDetails,
-            newItem: EmployeeDetails
+            oldItem: DatabaseEmployee,
+            newItem: DatabaseEmployee
         ): Boolean {
             return oldItem.id == newItem.id
         }
