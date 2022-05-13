@@ -1,17 +1,21 @@
 package com.example.apirecycler
 
-import android.graphics.drawable.Drawable
 import android.view.LayoutInflater
 import android.view.ViewGroup
-import androidx.core.graphics.drawable.toDrawable
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.example.apirecycler.databinding.EmployeeUnitBinding
 import com.example.apirecycler.network.EmployeeDetails
+import java.util.logging.Logger.global
 
 class EmployeeListAdapter : ListAdapter<EmployeeDetails, EmployeeListAdapter.EmployeeDetailsViewHolder>(DiffCallback) {
     class EmployeeDetailsViewHolder(private var binding: EmployeeUnitBinding) : RecyclerView.ViewHolder(binding.root){
+        var employees: List<EmployeeDetails> = emptyList()
+            set(value) {
+                field = value
+            }
+
         fun bind(employeeDetails: EmployeeDetails) {
             binding.property = employeeDetails
             binding.executePendingBindings()

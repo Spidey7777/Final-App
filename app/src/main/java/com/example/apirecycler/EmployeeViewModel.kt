@@ -6,6 +6,7 @@ import androidx.lifecycle.*
 import com.example.apirecycler.database.getDatabase
 import com.example.apirecycler.network.EmployeeApi
 import com.example.apirecycler.network.EmployeeDetails
+import com.example.apirecycler.repository.EmployeesRepository
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.Job
@@ -50,7 +51,15 @@ class EmployeeViewModel(application: Application) : AndroidViewModel(application
 //    }
 
     private val database = getDatabase(application)
+    private val repository = EmployeesRepository(database)
 
+    init {
+        viewModelScope.launch {
+            repository.refreshList()
+        }
+    }
+
+    val empList = repository.empList
 
 
     class Factory(val application: Application) : ViewModelProvider.Factory {
