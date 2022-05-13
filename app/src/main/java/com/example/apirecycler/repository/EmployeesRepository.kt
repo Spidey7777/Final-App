@@ -20,11 +20,11 @@ class EmployeesRepository(private val database: EmployeesDatabase) {
             val employeeList = EmployeeApi.RETROFIT_SERVICE.getValues().await()
 //            Log.d("log ", "refreshList() called" + employeeList)
 
-            var inthalist : ArrayList<DatabaseEmployee> = arrayListOf()
+            val inthalist : ArrayList<DatabaseEmployee> = arrayListOf()
 
             employeeList.forEach {
 
-                var inthaItem = DatabaseEmployee(it.id, it.name, it.email, it.gender, it.status)
+                val inthaItem = DatabaseEmployee(it.id, it.name, it.email, it.gender, it.status)
                 inthalist.add(inthaItem)
 
             }
