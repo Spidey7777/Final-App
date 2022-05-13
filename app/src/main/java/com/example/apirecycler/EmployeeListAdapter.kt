@@ -12,10 +12,6 @@ import java.util.logging.Logger.global
 
 class EmployeeListAdapter : ListAdapter<DatabaseEmployee, EmployeeListAdapter.EmployeeDetailsViewHolder>(DiffCallback) {
     class EmployeeDetailsViewHolder(private var binding: EmployeeUnitBinding) : RecyclerView.ViewHolder(binding.root){
-        var employees: List<DatabaseEmployee> = emptyList()
-            set(value) {
-                field = value
-            }
 
         fun bind(employeeDetails: DatabaseEmployee) {
             binding.property = employeeDetails

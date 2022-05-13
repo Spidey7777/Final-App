@@ -13,15 +13,3 @@ data class DatabaseEmployee (
     val gender: String,
     val status: String
 )
-
-//Stringfun List<DatabaseEmployee>.asDomainModel(): List<EmployeeDetails> {
-//    return map {
-//        EmployeeDetails(
-//            id = it.id,
-//            name = it.name,
-//            email = it.email,
-//            gender = it.gender,
-//            status = it.status
-//        )
-//    }
-//}
